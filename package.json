@@ -1,0 +1,44 @@
+{
+  "name": "@tanuden/kumoha-react",
+  "version": "0.0.24",
+  "main": "lib/index.js",
+  "description": "React hooks for Tanuden Kumoha theming engine",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint --fix .",
+    "lint:check": "eslint .",
+    "format": "prettier --config .prettierrc.cjs --write './**/*.{ts,tsx,js,jsx,cjs,json,yml,yaml}'",
+    "format:check": "prettier --config .prettierrc.cjs --check './**/*.{ts,tsx,js,jsx,cjs,json,yml,yaml}'",
+    "prepare": "husky"
+  },
+  "dependencies": {
+    "@tanuden/kumoha": "^0.0.16",
+    "deep-object-diff": "^1.1.9",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "zustand": "^5.0.4"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.25.0",
+    "@types/node": "^22.15.17",
+    "@types/react": "^19.1.2",
+    "@types/react-dom": "^19.1.2",
+    "@vitejs/plugin-react-swc": "^3.9.0",
+    "eslint": "^9.25.0",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-prettier": "^5.4.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.19",
+    "globals": "^16.0.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.0.0",
+    "opentetsu": "^0.0.6",
+    "prettier": "^3.5.3",
+    "typescript": "~5.8.3",
+    "typescript-eslint": "^8.30.1",
+    "vite": "^6.3.5",
+    "vite-plugin-dts": "^4.5.3"
+  }
+}
