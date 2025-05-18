@@ -40,5 +40,15 @@
     "typescript-eslint": "^8.30.1",
     "vite": "^6.3.5",
     "vite-plugin-dts": "^4.5.3"
+  },
+  "lint-staged": {
+    "**/*.{ts,tsx,js,jsx,cjs,json}": [
+      "npm run format",
+      "npm run format:check"
+    ],
+    "**/*.{ts,tsx,js,jsx,cjs}": [
+      "npm run lint",
+      "npm run lint:check"
+    ]
   }
 }
