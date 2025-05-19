@@ -19,7 +19,7 @@ export default defineConfig({
       formats: ['es', 'cjs']
     },
     rollupOptions: {
-      external: ['react', 'react-dom', 'opentetsu']
+      external: ['react', 'react-dom', 'opentetsu', '@tanuden/kumoha']
     }
   }
 });
