@@ -31,13 +31,12 @@
   クライアントの接続状態、現在のステート、ログイン情報などのメタデータをリアルタイムで提供します。
 
 * **`useKumohaData()`**
-  現在のゲーム状態および同期された `KumohaArisuData` を返します。
+  現在のゲーム状態および同期された`KumohaArisuData`を返します。
 
 * **`useKumoha()`**
-  内部の `Kumoha` エンジンインスタンスに直接アクセスします。メソッドの直接呼び出しに使用します。
+  内部の`Kumoha`エンジンインスタンスに直接アクセスします。メソッドの直接呼び出しに使用します。
 
-  > [!TIP] 
-  > `sendButtonAction` を使用したいユーザーにとって重要なフックです。他の関数の使用は、`@tanuden/kumoha` の内部動作に精通している上級ユーザー向けです。
+  `sendButtonAction`を使用したいユーザーにとって重要なフックです。他の関数の使用は、`@tanuden/kumoha`の内部動作に精通している上級ユーザー向けです。
 
   詳細はメインライブラリの GitHub を参照してください: [@tanuden/kumoha](https://github.com/haruyukitanuki/kumoha)
 

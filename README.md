@@ -35,9 +35,8 @@
 
 * **`useKumoha()`**
   Exposes the underlying `Kumoha` engine instance. Useful for calling methods directly.
-
-  > [!TIP] 
-  > This hook is especially important for users who want to use `sendButtonAction`. Use of other internal engine functions is intended for advanced users familiar with the inner workings of `@tanuden/kumoha`.
+ 
+  This hook is especially important for users who want to use `sendButtonAction`. Use of other internal engine functions is intended for advanced users familiar with the inner workings of `@tanuden/kumoha`.
 
   For more details, refer to the main Kumoha library on GitHub: [@tanuden/kumoha](https://github.com/haruyukitanuki/kumoha)
 
