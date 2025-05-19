@@ -46,7 +46,7 @@ Install `@tanuden/kumoha-react` and its required dependencies `@tanuden/kumoha` 
 
 ```bash
 npm install @tanuden/kumoha @tanuden/kumoha-react
-npn install opentetsu -D
+npm install opentetsu -D
 ```
 
 Make sure the packages are included in your project to ensure proper functionality.

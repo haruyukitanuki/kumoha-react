@@ -46,7 +46,7 @@
 
 ```bash
 npm install @tanuden/kumoha @tanuden/kumoha-react
-npn install opentetsu -D
+npm install opentetsu -D
 ```
 
 パッケージをプロジェクトに含めることで、正しく動作します。
