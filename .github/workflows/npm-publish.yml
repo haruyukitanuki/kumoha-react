@@ -3,6 +3,10 @@
 
 name: Publish to NPM
 
+permissions:
+  contents: read
+  actions: write
+
 on:
   release:
     types: [created]
@@ -21,9 +25,6 @@ jobs:
   publish-npm:
     # needs: build
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      actions: write
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
