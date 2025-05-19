@@ -17,8 +17,8 @@
 > This documentation is available in English & Japanese<br>
 > このドキュメントは英語版と日本語版があります。
 > 
-> [![docs - en](https://img.shields.io/static/v1?label=docs&message=en&color=397eed)](https://github.com/haruyukitanuki/kumoha/blob/main/README.md) 
-> [![ドキュメント - ja](https://img.shields.io/static/v1?label=ドキュメント&message=ja&color=e32b47)](https://github.com/haruyukitanuki/kumoha/blob/main/README-ja.md)
+> [![docs - en](https://img.shields.io/static/v1?label=docs&message=en&color=397eed)](https://github.com/haruyukitanuki/kumoha-react/blob/main/README.md) 
+> [![ドキュメント - ja](https://img.shields.io/static/v1?label=ドキュメント&message=ja&color=e32b47)](https://github.com/haruyukitanuki/kumoha-react/blob/main/README-ja.md)
 
 ---
 
