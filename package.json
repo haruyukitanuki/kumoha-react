@@ -14,7 +14,7 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@tanuden/kumoha": "^0.0.16",
+    "@tanuden/kumoha": "^0.1.5",
     "deep-object-diff": "^1.1.9",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
