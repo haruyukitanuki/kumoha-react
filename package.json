@@ -1,6 +1,6 @@
 {
   "name": "@tanuden/kumoha-react",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "main": "dist/index.js",
   "description": "React hooks for Tanuden Kumoha theming engine",
   "type": "module",
@@ -14,7 +14,7 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@tanuden/kumoha": "^0.1.5",
+    "@tanuden/kumoha": "^0.2.0",
     "deep-object-diff": "^1.1.9",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",

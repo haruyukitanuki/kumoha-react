@@ -23,8 +23,14 @@ export const useInitializeKumoha = (
   options?: InitializeKumohaOptions
 ) => {
   // const [alreadyInit, setAlreadyInit] = useState(true); // Intentional default to true. Don't attempt to trigger anything until we confirm that there is an engine.
-  const { engine, _setEngine, clientMetadata, setClientMetadata, setData } =
-    useKumohaInternalStore();
+  const {
+    engine,
+    _setEngine,
+    clientMetadata,
+    setClientMetadata,
+    setData,
+    setThemeUserPrefs
+  } = useKumohaInternalStore();
 
   const kumoha = useMemo(() => {
     if (engine) return engine;
@@ -54,6 +60,10 @@ export const useInitializeKumoha = (
       setData(options?.testData || gameData);
     });
 
+    const userPrefsListener = kumoha.userPrefsListener((themeUserPrefs) => {
+      setThemeUserPrefs(themeUserPrefs || {});
+    });
+
     const clientMetaListener = kumoha.clientMetaListener(
       (incomingClientMetadata) => {
         const diff = updatedDiff(
@@ -73,6 +83,7 @@ export const useInitializeKumoha = (
 
     return () => {
       gameDataListener?.off();
+      userPrefsListener?.off();
       clientMetaListener?.off();
     };
   }, [options, kumoha]);

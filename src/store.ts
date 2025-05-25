@@ -2,7 +2,8 @@ import { create } from 'zustand';
 import {
   type GameDataState,
   type KumohaClientMeta,
-  KumohaEngine
+  KumohaEngine,
+  type KumohaThemeUserPrefs
 } from '@tanuden/kumoha';
 import { type KumohaArisuData } from './hooks/use-init-kumoha';
 
@@ -22,12 +23,14 @@ type KumohaStore = {
   engine: KumohaEngine | undefined;
   clientMetadata: KumohaClientMeta;
   data: KumohaArisuData;
+  themeUserPrefs: KumohaThemeUserPrefs;
 };
 
 type KumohaStoreFunctions = {
   _setEngine: (engine: KumohaEngine | undefined) => void;
   setClientMetadata: (clientMetadata: KumohaClientMeta) => void;
   setData: (data: KumohaArisuData) => void;
+  setThemeUserPrefs: (themeUserPrefs: KumohaThemeUserPrefs) => void;
 };
 
 export const useKumohaInternalStore = create<
@@ -38,5 +41,7 @@ export const useKumohaInternalStore = create<
   clientMetadata: KumohaClientDefaults,
   setClientMetadata: (clientMetadata) => set({ clientMetadata }),
   data: KumohaArisuDataDefaults as KumohaArisuData,
-  setData: (data) => set({ data })
+  setData: (data) => set({ data }),
+  themeUserPrefs: {},
+  setThemeUserPrefs: (themeUserPrefs) => set({ themeUserPrefs })
 }));
