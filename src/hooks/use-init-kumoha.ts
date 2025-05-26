@@ -3,8 +3,7 @@ import {
   type GameDataState,
   Kumoha,
   type KumohaClientMeta,
-  type KumohaEngineOptions,
-  type KumohaListener
+  type KumohaEngineOptions
 } from '@tanuden/kumoha';
 import { updatedDiff } from 'deep-object-diff';
 import { useKumohaInternalStore } from '../store';
@@ -92,19 +91,17 @@ export const useInitializeKumoha = (
     useState<boolean>(false);
 
   useLayoutEffect(() => {
-    let userPrefsListener: KumohaListener | undefined;
-    if (clientMetadata.state === 'ok') {
-      userPrefsListener = kumoha.userPrefsListener((themeUserPrefs) => {
-        setThemeUserPrefs(themeUserPrefs || {});
-      });
+    // let userPrefsListener: KumohaListener | undefined;
+    const userPrefsListener = kumoha.userPrefsListener((themeUserPrefs) => {
+      setThemeUserPrefs(themeUserPrefs || {});
+    });
 
-      // Initial user prefs fetch
-      if (!themeUserPrefsFetched) {
-        kumoha.getUserPrefs().then((prefs) => {
-          setThemeUserPrefs(prefs || {});
-        });
-        setThemeUserPrefsFetched(true);
-      }
+    // Initial user prefs fetch
+    if (!themeUserPrefsFetched && clientMetadata.state === 'ok') {
+      kumoha.getUserPrefs().then((prefs) => {
+        setThemeUserPrefs(prefs || {});
+      });
+      setThemeUserPrefsFetched(true);
     }
 
     return () => {
