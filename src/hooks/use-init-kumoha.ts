@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react';
+import { useLayoutEffect, useMemo } from 'react';
 import {
   type GameDataState,
   Kumoha,
@@ -46,7 +46,7 @@ export const useInitializeKumoha = (
     return kumohaEngine;
   }, [options, uri, _setEngine]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (options?.testData) {
       console.info(
         `Kumoha is in test mode. No connection will be made. クモハエンジンはテストモードです。サーバーに接続は行われません。`
@@ -62,6 +62,11 @@ export const useInitializeKumoha = (
 
     const userPrefsListener = kumoha.userPrefsListener((themeUserPrefs) => {
       setThemeUserPrefs(themeUserPrefs || {});
+    });
+
+    // Initial user prefs fetch
+    kumoha.getUserPrefs().then((prefs) => {
+      setThemeUserPrefs(prefs || {});
     });
 
     const clientMetaListener = kumoha.clientMetaListener(
