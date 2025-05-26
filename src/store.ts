@@ -20,7 +20,7 @@ export const KumohaClientDefaults: KumohaClientMeta = {
 };
 
 type KumohaStore = {
-  engine: KumohaEngine | undefined;
+  engine?: KumohaEngine;
   clientMetadata: KumohaClientMeta;
   data: KumohaArisuData;
   themeUserPrefs: KumohaThemeUserPrefs;

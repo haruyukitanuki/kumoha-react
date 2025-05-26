@@ -1,9 +1,10 @@
-import { useLayoutEffect, useMemo } from 'react';
+import { useLayoutEffect, useMemo, useState } from 'react';
 import {
   type GameDataState,
   Kumoha,
   type KumohaClientMeta,
-  type KumohaEngineOptions
+  type KumohaEngineOptions,
+  type KumohaListener
 } from '@tanuden/kumoha';
 import { updatedDiff } from 'deep-object-diff';
 import { useKumohaInternalStore } from '../store';
@@ -15,6 +16,7 @@ export interface KumohaArisuData {
 }
 
 export type InitializeKumohaOptions = KumohaEngineOptions & {
+  themeName?: string;
   testData?: KumohaArisuData;
 };
 
@@ -29,6 +31,7 @@ export const useInitializeKumoha = (
     clientMetadata,
     setClientMetadata,
     setData,
+    themeUserPrefs,
     setThemeUserPrefs
   } = useKumohaInternalStore();
 
@@ -36,6 +39,7 @@ export const useInitializeKumoha = (
     if (engine) return engine;
     // Enforce single instance of KumohaEngine
     const kumohaEngine = Kumoha(uri, {
+      themeName: options?.themeName,
       socketOptions: {
         autoConnect: options?.testData ? false : true,
         forceNew: true
@@ -44,7 +48,9 @@ export const useInitializeKumoha = (
     _setEngine(kumohaEngine);
 
     return kumohaEngine;
-  }, [options, uri, _setEngine]);
+  }, [engine, uri, options?.themeName, options?.testData, _setEngine]);
+
+  const [firstInvokation, setFirstInvokation] = useState<boolean>(true);
 
   useLayoutEffect(() => {
     if (options?.testData) {
@@ -60,14 +66,19 @@ export const useInitializeKumoha = (
       setData(options?.testData || gameData);
     });
 
-    const userPrefsListener = kumoha.userPrefsListener((themeUserPrefs) => {
-      setThemeUserPrefs(themeUserPrefs || {});
-    });
+    let userPrefsListener: KumohaListener | undefined;
+    if (clientMetadata.state === 'ok') {
+      userPrefsListener = kumoha.userPrefsListener((themeUserPrefs) => {
+        setThemeUserPrefs(themeUserPrefs || {});
+      });
 
-    // Initial user prefs fetch
-    kumoha.getUserPrefs().then((prefs) => {
-      setThemeUserPrefs(prefs || {});
-    });
+      // Initial user prefs fetch
+      if (firstInvokation) {
+        kumoha.getUserPrefs().then((prefs) => {
+          setThemeUserPrefs(prefs || {});
+        });
+      }
+    }
 
     const clientMetaListener = kumoha.clientMetaListener(
       (incomingClientMetadata) => {
@@ -86,12 +97,26 @@ export const useInitializeKumoha = (
     );
     // }
 
+    if (!firstInvokation) {
+      setFirstInvokation(false);
+    }
+
     return () => {
       gameDataListener?.off();
       userPrefsListener?.off();
       clientMetaListener?.off();
     };
-  }, [options, kumoha]);
+  }, [
+    options,
+    kumoha,
+    clientMetadata.state,
+    themeUserPrefs,
+    clientMetadata,
+    setData,
+    setThemeUserPrefs,
+    setClientMetadata,
+    firstInvokation
+  ]);
 
   return kumoha;
 };
