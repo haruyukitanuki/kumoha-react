@@ -31,7 +31,6 @@ export const useInitializeKumoha = (
     clientMetadata,
     setClientMetadata,
     setData,
-    themeUserPrefs,
     setThemeUserPrefs
   } = useKumohaInternalStore();
 
@@ -50,8 +49,6 @@ export const useInitializeKumoha = (
     return kumohaEngine;
   }, [engine, uri, options?.themeName, options?.testData, _setEngine]);
 
-  const [firstInvokation, setFirstInvokation] = useState<boolean>(true);
-
   useLayoutEffect(() => {
     if (options?.testData) {
       console.info(
@@ -61,25 +58,16 @@ export const useInitializeKumoha = (
 
       return;
     }
-
     const gameDataListener = kumoha.arisuListener((gameData) => {
       setData(options?.testData || gameData);
     });
 
-    let userPrefsListener: KumohaListener | undefined;
-    if (clientMetadata.state === 'ok') {
-      userPrefsListener = kumoha.userPrefsListener((themeUserPrefs) => {
-        setThemeUserPrefs(themeUserPrefs || {});
-      });
+    return () => {
+      gameDataListener?.off();
+    };
+  }, [kumoha, options?.testData, setData]);
 
-      // Initial user prefs fetch
-      if (firstInvokation) {
-        kumoha.getUserPrefs().then((prefs) => {
-          setThemeUserPrefs(prefs || {});
-        });
-      }
-    }
-
+  useLayoutEffect(() => {
     const clientMetaListener = kumoha.clientMetaListener(
       (incomingClientMetadata) => {
         const diff = updatedDiff(
@@ -95,28 +83,34 @@ export const useInitializeKumoha = (
         }
       }
     );
-    // }
+    return () => {
+      clientMetaListener?.off();
+    };
+  }, [clientMetadata, kumoha, setClientMetadata]);
 
-    if (!firstInvokation) {
-      setFirstInvokation(false);
+  const [themeUserPrefsFetched, setThemeUserPrefsFetched] =
+    useState<boolean>(false);
+
+  useLayoutEffect(() => {
+    let userPrefsListener: KumohaListener | undefined;
+    if (clientMetadata.state === 'ok') {
+      userPrefsListener = kumoha.userPrefsListener((themeUserPrefs) => {
+        setThemeUserPrefs(themeUserPrefs || {});
+      });
+
+      // Initial user prefs fetch
+      if (!themeUserPrefsFetched) {
+        kumoha.getUserPrefs().then((prefs) => {
+          setThemeUserPrefs(prefs || {});
+        });
+        setThemeUserPrefsFetched(true);
+      }
     }
 
     return () => {
-      gameDataListener?.off();
       userPrefsListener?.off();
-      clientMetaListener?.off();
     };
-  }, [
-    options,
-    kumoha,
-    clientMetadata.state,
-    themeUserPrefs,
-    clientMetadata,
-    setData,
-    setThemeUserPrefs,
-    setClientMetadata,
-    firstInvokation
-  ]);
+  }, [clientMetadata.state, themeUserPrefsFetched, kumoha, setThemeUserPrefs]);
 
   return kumoha;
 };
