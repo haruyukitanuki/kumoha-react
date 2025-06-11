@@ -3,6 +3,7 @@ import {
   type GameDataState,
   type KumohaClientMeta,
   KumohaEngine,
+  type KumohaROMDataset,
   type KumohaThemeUserPrefs
 } from '@tanuden/kumoha';
 import { type KumohaArisuData } from './hooks/use-init-kumoha';
@@ -10,11 +11,7 @@ import { type KumohaArisuData } from './hooks/use-init-kumoha';
 export const KumohaArisuDataDefaults: KumohaArisuData = {
   gameData: {} as GameDataState['gameData'],
   gameState: {} as GameDataState['gameState'],
-  pluginData: {} as GameDataState['pluginData'],
-  rom: {
-    rollingstock: {},
-    route: []
-  } as GameDataState['rom']
+  pluginData: {} as GameDataState['pluginData']
 };
 
 export const KumohaClientDefaults: KumohaClientMeta = {
@@ -28,6 +25,7 @@ type KumohaStore = {
   clientMetadata: KumohaClientMeta;
   data: KumohaArisuData;
   themeUserPrefs: KumohaThemeUserPrefs;
+  romData: KumohaROMDataset;
 };
 
 type KumohaStoreFunctions = {
@@ -35,6 +33,7 @@ type KumohaStoreFunctions = {
   setClientMetadata: (clientMetadata: KumohaClientMeta) => void;
   setData: (data: KumohaArisuData) => void;
   setThemeUserPrefs: (themeUserPrefs: KumohaThemeUserPrefs) => void;
+  setRomData: (rom: KumohaROMDataset) => void;
 };
 
 export const useKumohaInternalStore = create<
@@ -47,5 +46,10 @@ export const useKumohaInternalStore = create<
   data: KumohaArisuDataDefaults as KumohaArisuData,
   setData: (data) => set({ data }),
   themeUserPrefs: {},
-  setThemeUserPrefs: (themeUserPrefs) => set({ themeUserPrefs })
+  setThemeUserPrefs: (themeUserPrefs) => set({ themeUserPrefs }),
+  romData: {
+    rollingstock: {},
+    route: []
+  },
+  setRomData: (rom) => set({ romData: rom })
 }));

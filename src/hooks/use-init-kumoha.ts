@@ -12,7 +12,6 @@ export interface KumohaArisuData {
   gameData: GameDataState['gameData'];
   gameState: GameDataState['gameState'];
   pluginData: GameDataState['pluginData'];
-  rom: GameDataState['rom'];
 }
 
 export type InitializeKumohaOptions = KumohaEngineOptions & {
@@ -31,7 +30,8 @@ export const useInitializeKumoha = (
     clientMetadata,
     setClientMetadata,
     setData,
-    setThemeUserPrefs
+    setThemeUserPrefs,
+    setRomData
   } = useKumohaInternalStore();
 
   const kumoha = useMemo(() => {
@@ -92,7 +92,6 @@ export const useInitializeKumoha = (
     useState<boolean>(false);
 
   useLayoutEffect(() => {
-    // let userPrefsListener: KumohaListener | undefined;
     const userPrefsListener = kumoha.userPrefsListener((themeUserPrefs) => {
       setThemeUserPrefs(themeUserPrefs || {});
     });
@@ -109,6 +108,18 @@ export const useInitializeKumoha = (
       userPrefsListener?.off();
     };
   }, [clientMetadata.state, themeUserPrefsFetched, kumoha, setThemeUserPrefs]);
+
+  const [romFetched, setROMFetched] = useState<boolean>(false);
+
+  useLayoutEffect(() => {
+    // Initial rom fetch
+    if (!romFetched && clientMetadata.state === 'ok') {
+      kumoha.getROM().then((romData) => {
+        setRomData(romData);
+      });
+      setROMFetched(true);
+    }
+  }, [clientMetadata.state, kumoha, romFetched, setRomData]);
 
   return kumoha;
 };
