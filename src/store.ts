@@ -10,7 +10,11 @@ import { type KumohaArisuData } from './hooks/use-init-kumoha';
 export const KumohaArisuDataDefaults: KumohaArisuData = {
   gameData: {} as GameDataState['gameData'],
   gameState: {} as GameDataState['gameState'],
-  pluginData: {} as GameDataState['pluginData']
+  pluginData: {} as GameDataState['pluginData'],
+  rom: {
+    rollingstock: {},
+    route: []
+  } as GameDataState['rom']
 };
 
 export const KumohaClientDefaults: KumohaClientMeta = {

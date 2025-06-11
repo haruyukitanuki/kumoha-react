@@ -12,6 +12,7 @@ export interface KumohaArisuData {
   gameData: GameDataState['gameData'];
   gameState: GameDataState['gameState'];
   pluginData: GameDataState['pluginData'];
+  rom: GameDataState['rom'];
 }
 
 export type InitializeKumohaOptions = KumohaEngineOptions & {
