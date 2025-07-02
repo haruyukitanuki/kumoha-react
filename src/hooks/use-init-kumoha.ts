@@ -59,7 +59,7 @@ export const useInitializeKumoha = (
       return;
     }
     const gameDataListener = kumoha.arisuListener((gameData) => {
-      setData(options?.testData || gameData);
+      setData(options?.testData ? options?.testData : gameData);
     });
 
     return () => {
