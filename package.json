@@ -13,6 +13,9 @@
     "format:check": "prettier --config .prettierrc.cjs --check './**/*.{ts,tsx,js,jsx,cjs,json,yml,yaml}'",
     "prepare": "husky"
   },
+  "repository": {
+    "url": "https://github.com/haruyukitanuki/kumoha-react"
+  },
   "peerDependencies": {
     "@tanuden/kumoha": "^0.4.0"
   },
