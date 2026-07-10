@@ -1,3 +1,10 @@
+> [!CAUTION]
+> **このスタンドアロンの `@tanuden/kumoha-react` リポジトリは非推奨（deprecated）となり、メンテナンスを終了しました。**
+>
+> 後継である **[Kumoha モノレポ](https://github.com/haruyukitanuki/kumoha)** に置き換えられました。`@tanuden/kumoha` と `@tanuden/kumoha-react` は現在このモノレポで一緒に開発されています。
+>
+> このリポジトリへの今後の更新・修正・サポートは行われません。
+
 <p align="center">
 <picture>
   <source media="(prefers-color-scheme: dark), (max-height: 50px)" srcset="https://raw.githubusercontent.com/haruyukitanuki/kumoha-react/refs/heads/main/TanudenKumohaReact-LogoWhite.svg">

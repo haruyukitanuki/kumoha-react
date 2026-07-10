@@ -1,3 +1,10 @@
+> [!CAUTION]
+> **This standalone `@tanuden/kumoha-react` repository is deprecated and no longer maintained.**
+>
+> It has been superseded by the **[Kumoha monorepo](https://github.com/haruyukitanuki/kumoha)**, where `@tanuden/kumoha` and `@tanuden/kumoha-react` are now developed together.
+>
+> No further updates, fixes, or support will be provided for this repository.
+
 <p align="center">
 <picture>
   <source media="(prefers-color-scheme: dark), (max-height: 50px)" srcset="https://raw.githubusercontent.com/haruyukitanuki/kumoha-react/refs/heads/main/TanudenKumohaReact-LogoWhite.svg">
